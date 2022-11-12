@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>replit</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <div class="calculator">
+      <div class="firstHalfCalculator">
+        <input class="input" placeholder="Enter an expression" />
+        <button class="calculateBtn">Calculate</button>
+      </div>
+
+      <div class="secondHalfCalculator">
+        <div class="output">0</div>
+        <button class="clearOutputBtn">Clear Output</button>
+        <table>
+          <tr>
+            <td>
+              <button class="NoinputBtn">1</button>
+            </td>
+            <td>
+              <button class="NoinputBtn">2</button>
+            </td>
+            <td>
+              <button class="NoinputBtn">3</button>
+            </td>
+            <td>
+              <button class="ExinputBtn">+</button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <button class="NoinputBtn">4</button>
+            </td>
+            <td>
+              <button class="NoinputBtn">5</button>
+            </td>
+            <td>
+              <button class="NoinputBtn">6</button>
+            </td>
+            <td>
+              <button class="ExinputBtn">-</button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <button class="NoinputBtn">7</button>
+            </td>
+            <td>
+              <button class="NoinputBtn">8</button>
+            </td>
+            <td>
+              <button class="NoinputBtn">9</button>
+            </td>
+            <td>
+              <button class="ExinputBtn">*</button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <button class="NoinputBtn">0</button>
+            </td>
+            <td>
+              <button class="NoinputBtn">.</button>
+            </td>
+
+            <td>
+              <button class="ExinputBtn">^</button>
+            </td>
+            <td>
+              <button class="ExinputBtn">/</button>
+            </td>
+          </tr>
+        </table>
+        <div></div>
+      </div>
+    </div>
+    <script>
+      let input = document.querySelector(".input");
+      let NoinputBtn = document.querySelectorAll(".NoinputBtn");
+      let ExinputBtn = document.querySelectorAll(".ExinputBtn");
+      let calculateBtn = document.querySelector(".calculateBtn");
+      let output = document.querySelector(".output");
+      let clearOutputBtn = document.querySelector(".clearOutputBtn");
+
+      let inputArr = [];
+      let finalInput;
+      NoinputBtn.forEach((item) => {
+        item.addEventListener("click", () => {
+          inputArr.push(item.innerText);
+          input.value += item.innerText;
+        });
+      });
+
+      ExinputBtn.forEach((item) => {
+        item.addEventListener("click", () => {
+          inputArr.push(item.innerText);
+          input.value += item.innerText;
+        });
+      });
+      const checkNewArr = () => {
+        for (let i = 0; i < inputArr.length; i = i + 2) {
+          if (
+            inputArr[i] == "+" ||
+            inputArr[i] == "-" ||
+            inputArr[i] == "*" ||
+            inputArr[i] == "/"
+          ) {
+            alert("check input");
+            location.reload();
+          } else {
+            continue;
+          }
+        }
+      };
+      const validateInput = () => {
+        let ffirstInput = inputArr[0];
+        let length = inputArr.length - 1;
+        let lastInput = inputArr[length];
+        if (ffirstInput == "*" || ffirstInput == "/") {
+          alert("input should start with number");
+        } else if (
+          lastInput == "+" ||
+          lastInput == "-" ||
+          lastInput == "*" ||
+          lastInput == "/"
+        ) {
+          alert("input should end with number");
+        } else {
+          finalInput = inputArr.join("");
+        }
+      };
+      calculateBtn.addEventListener("click", () => {
+        checkNewArr();
+        validateInput();
+        output.innerText = eval(finalInput);
+        input.value = "";
+        inputArr = [];
+      });
+      clearOutputBtn.addEventListener("click", () => {
+        output.innerText = 0;
+      });
+    </script>
+  </body>
+</html>
