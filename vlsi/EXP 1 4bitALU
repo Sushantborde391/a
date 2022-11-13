@@ -1,0 +1,52 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.STD_LOGIC_unsigned.ALL;
+-- Uncomment the following library declaration if using
+-- arithmetic functions with Signed or Unsigned values
+--use IEEE.NUMERIC_STD.ALL;
+
+-- Uncomment the following library declaration if instantiating
+-- any Xilinx leaf cells in this code.
+--library UNISIM;
+--use UNISIM.VComponents.all;
+
+entity alu4bit is
+    Port ( n1,n2 : in STD_LOGIC_VECTOR (3 downto 0);
+           op : in STD_LOGIC_VECTOR (2 downto 0);
+           res : out STD_LOGIC_VECTOR (3 downto 0);
+           flag : out STD_LOGIC);
+end alu4bit;
+
+architecture Behavioral of alu4bit is
+
+begin
+process(n1,n2,op)
+variable temp: std_logic_vector(4 downto 0);
+begin
+flag<='0';
+case op is
+when "000"=>
+temp:= ('0' & n1) + n2; --when op =000 then perform addition
+res<= temp(3 downto 0);
+flag<= temp(4);
+when "001"=>  ---Subtraction
+if(n1> n2)then
+res<= n1- n2;
+else
+res<=n2- n1;
+end if;
+when "010"=>
+res<= n1 and n2;
+when "011"=>
+res<= n1 nand n2;
+when "100"=>
+res<= n1 xor n2;
+when "101"=>
+res<= n1 nor n2;
+when "110"=>
+res<=  not n1;
+when others =>
+res<= n2;
+end case;
+end process;
+end Behavioral;

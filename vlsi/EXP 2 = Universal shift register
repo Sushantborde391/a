@@ -1,0 +1,86 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.STD_LOGIC_unsigned.ALL;
+
+
+-- Uncomment the following library declaration if using
+-- arithmetic functions with Signed or Unsigned values
+--use IEEE.NUMERIC_STD.ALL;
+
+-- Uncomment the following library declaration if instantiating
+-- any Xilinx leaf cells in this code.
+--library UNISIM;
+--use UNISIM.VComponents.all;
+
+entity shiftreg is
+    Port ( clk,rst,load,si : in STD_LOGIC;
+           pi : in STD_LOGIC_VECTOR (3 downto 0);
+           po : out STD_LOGIC_VECTOR (3 downto 0);
+           mode:in STD_LOGIC_VECTOR (1 downto 0);
+           so : out STD_LOGIC);
+end shiftreg;
+
+architecture Behavioral of shiftreg is
+signal clkout:std_logic;
+signal temp:std_logic_vector(3 downto 0);
+signal counter: integer range 0 to 49999999;                   Counter = Fin/Fout = 100 MHz/ 1Hz = 100 X 10 ^ 6
+begin
+process(clk,rst)   -----------for clock frequency division      Clkout High for 50 X 10^ 6 Cycles
+								Clkout low for 50 X 10^ 6 Cycles
+begin
+if(rst='1')then
+clkout<='0';
+counter<=0;
+elsif(clk'event and clk='1')then
+if(counter=49999999)then
+clkout<=not clkout;
+counter<=0;
+else 
+counter<= counter + 1;
+end if;
+end if;
+end process;
+
+process(clk,rst) -----------Actual shift register operation
+begin
+if(rst='1') then
+so<='0';
+po<="0000";
+elsif(clk'event and clk='1')then
+case mode is
+when "00" =>
+po<=pi;      -------PIPO
+so<='0';
+
+when "01"=>  -------SISO
+temp(0)<=si;
+temp(1)<=temp(0);
+temp(2)<=temp(1);
+temp(3)<=temp(2);
+so<=temp(3);
+
+po<="0000";
+
+when "10"=>
+if (load='1')then  ------PISO
+temp<=pi;
+else
+temp(2)<=temp(3);
+temp(1)<=temp(2);
+ temp(0)<=temp(1);
+ so<=temp(0);
+ end if;
+ 
+ when others=>
+ if (load='0')then   -----SIPO
+ temp(0)<=si;
+ temp(1)<=temp(0);
+ temp(2)<=temp(1);
+ temp(3)<=temp(2);
+ else
+  po<=temp;
+ end if;
+ end case;
+ end if;
+  end process;
+    end Behavioral;

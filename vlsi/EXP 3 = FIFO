@@ -1,0 +1,86 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.STD_LOGIC_unsigned.ALL;
+
+-- Uncomment the following library declaration if using
+-- arithmetic functions with Signed or Unsigned values
+--use IEEE.NUMERIC_STD.ALL;
+
+-- Uncomment the following library declaration if instantiating
+-- any Xilinx leaf cells in this code.
+--library UNISIM;
+--use UNISIM.VComponents.all;
+
+entity FIFO is
+    Port ( clk,rst, wren,rden : in STD_LOGIC;
+           empty : out STD_LOGIC;
+           full : out STD_LOGIC;
+           dataout:out std_logic_vector(7 downto 0));
+          
+end FIFO;
+
+architecture Behavioral of FIFO is
+signal clkout:std_logic;
+signal counter: integer range 0 to 49999999;
+signal rdptr,wrptr:integer range 0 to 7;
+type fifo1 is array (0 to 7) of std_logic_vector(7 downto 0);
+signal memory:fifo1;
+type datain1 is array (0 to 7) of std_logic_vector(7 downto 0);
+signal data:datain1:=("10101010","10111011","10010101","11110000","00001111","10100101","11110101","01100110");
+begin
+
+process(clk,rst)   --clock frequency division
+begin
+if(rst='1')then
+clkout<='0';
+counter<=0;
+elsif(clk'event and clk='1')then
+if(counter=49999999)then
+clkout<=not clkout;
+counter<=0;
+else 
+counter<= counter + 1;
+end if;
+end if;
+end process;
+
+process(clk)   ----Actual FIFO process
+begin
+if (clk'event and clk='1')then
+if(rst='1')then
+for i in 0 to 7 loop
+memory(i)<="00000000";
+end loop;
+empty<='1';
+full<='0';
+rdptr<=0;
+wrptr<=0;
+
+elsif(wren='1')then       ---Write in FIFO
+rdptr<=0;
+memory(wrptr)<=data(wrptr);
+empty<='0';
+if(wrptr=7)then
+wrptr<=wrptr;
+full<='1';
+else
+wrptr<=wrptr + 1;
+end if;
+
+elsif(rden='1')then    ---Read From FIFO
+wrptr<=0;
+dataout<=memory(rdptr);
+full<='0';
+if(rdptr=7)then
+rdptr <= rdptr;
+empty<='1';
+else
+rdptr<=rdptr + 1;
+end if;
+
+else
+dataout<= "ZZZZZZZZ";
+end if;
+end if;
+end process;
+end Behavioral;
