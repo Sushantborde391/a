@@ -20,7 +20,8 @@
       function createTable() {
         var tableNoValue = tableNo.value;
         for (let i = 1; i <= 10; i++) {
-          output.innerText += tableNoValue * i + "\n";
+          output.innerText +=
+            `${tableNoValue} * ${i} = ${tableNoValue * i}` + "\n";
         }
       }
 

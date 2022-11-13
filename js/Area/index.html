@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div>
+      <p>Area of circle</p>
+      <input class="circleRadius" />
+      <button class="circleBtn">Calculate</button>
+      <div class="areaOfCircle">area of circle</div>
+    </div>
+    <hr />
+    <div>
+      <p>Area of triangle</p>
+      <input class="inputBase" />
+      <input class="inputHeight" />
+      <button class="triangleBtn">Calculate</button>
+      <div class="areaOfTriangle">area of circle</div>
+    </div>
+    <script>
+      let circleRadius = document.querySelector(".circleRadius");
+      let circleBtn = document.querySelector(".circleBtn");
+      let areaOfCircle = document.querySelector(".areaOfCircle");
+
+      circleBtn.addEventListener("click", () => {
+        let areaOfCircleFormula = 3.14 * circleRadius.value ** 2;
+        areaOfCircle.innerText = areaOfCircleFormula;
+      });
+      /***********************/
+      let inputBase = document.querySelector(".inputBase");
+      let inputHeight = document.querySelector(".inputHeight");
+      let triangleBtn = document.querySelector(".triangleBtn");
+      let areaOfTriangle = document.querySelector(".areaOfTriangle");
+
+      triangleBtn.addEventListener("click", () => {
+        let areaOftriangleFormula = (inputBase.value * inputHeight.value) / 2;
+        areaOfTriangle.innerText = areaOftriangleFormula;
+      });
+    </script>
+  </body>
+</html>
