@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>String Operations</h1>
+    Enter a String
+    <input type="text" id="strng" />
+    <br /><br />
+    <h3>Choose your operation</h3>
+    <br /><br />
+    <input type="button" value="Reverse the strng" onClick="strReverse()" />
+    <input type="button" value="Replace Sub-String" onClick="strReplace()" />
+    <input type="button" value="Check Palindrome" onClick="strPalindrome()" />
+    <script>
+      function strReverse() {
+        var strng = document.getElementById("strng").value;
+        document.write(strng.split("").reverse().join(""));
+      }
+      function strReplace() {
+        var strng = document.getElementById("strng").value;
+        var rstrng = strng.replace("coet", "College");
+        document.write(rstrng);
+      }
+      function strPalindrome() {
+        var strng = document.getElementById("strng").value;
+        var revstrng = strng.split("").reverse().join("");
+        var fstrng = strng.localeCompare(revstrng);
+        if (fstrng == 0) document.write("The String is a Palindrome");
+        else document.write("The String is not a Palindrome");
+      }
+    </script>
+  </body>
+</html>

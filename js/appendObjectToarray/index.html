@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Append to an Array</h1>
+    <h3>Array : 5 10 15 20 30</h3>
+    <br /><br /><br />
+    Enter Value to Be Added
+    <input type="text" id="add" /><br />
+    <h2>Selection of Operation</h2>
+
+    1)
+    <input
+      type="button"
+      value="By using 'push()' method"
+      onclick="pushElement()"
+    /><br /><br />
+
+    2) Enter the index at which value needs to be added
+    <input type="text" id="value" />
+    <input
+      type="button"
+      value="By using 'splice()' method"
+      onclick="spliceElement()"
+    /><br /><br />
+
+    3)
+    <input
+      type="button"
+      value="By using 'unshift()' method"
+      onclick="unshiftElement()"
+    />
+    <script>
+      const arr = ["5", "10", "15", "20", "30"];
+      function pushElement() {
+        var pa = document.getElementById("add").value;
+        arr.push(pa);
+        document.write(arr);
+      }
+      function spliceElement() {
+        var sa = document.getElementById("add").value;
+        var index = document.getElementById("value").value;
+        arr.splice(index, 0, sa);
+        document.write(arr);
+      }
+      function unshiftElement() {
+        var ua = document.getElementById("add").value;
+        arr.unshift(ua);
+        document.write(arr);
+      }
+    </script>
+  </body>
+</html>

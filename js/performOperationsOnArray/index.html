@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    Enter Elements to create array:
+    <input id="Elements" type="text" />
+    <input type="button" value="Add Elements" onclick="addElements()" />
+    <br /><br />
+    After performing Every Operation Please Click here to see result
+    <input type="button" value="Display Array" onclick="displayValues()" />
+    <br /><br />
+    Choose Operations:
+    <input type="button" value="Pop Element" onclick="removeElementAtEnd()" />
+    <input
+      type="button"
+      value="Shift Element"
+      onclick="removeElementAtFirst()"
+    />
+    <br /><br />
+    Enter index number to delete particular element:<input
+      type="text"
+      id="num1"
+    />
+    <input type="button" value="Delete Element" onclick="deleteElement()" />
+    <br /><br />
+    Enter index numbers from where to where you have to delete element:<input
+      type="text"
+      id="num"
+    />
+    <input type="text" id="num2" />
+    <input type="button" value="Slice array" onclick="sliceArray()" />
+    <br /><br />
+    Enter any elemet to check whether element present or not :<input
+      type="text"
+      id="num3"
+    />
+    <input type="button" value="Check Include" onclick="includeElement()" />
+    <br /><br />
+    Enter any elemet to add : <input type="text" id="num4" />
+    <input type="button" value="pushElement" onclick="pushElement()" />
+    <br /><br />
+    <div id="result"></div>
+    <script>
+      var i = 0;
+      var arrElements = new Array();
+      function addElements() {
+        arrElements[i] = document.getElementById("Elements").value;
+        alert("Element added to the array is : " + arrElements[i]);
+        i++;
+        document.getElementById("Elements").value = "";
+      }
+      function displayValues() {
+        var content = "Elements Entered by User : <br>";
+        content += [arrElements] + "</br>";
+        document.getElementById("result").innerHTML = content;
+      }
+      function removeElementAtEnd() {
+        var a = arrElements.pop();
+        alert("Removed last element");
+      }
+      function removeElementAtFirst() {
+        var b = arrElements.shift(2);
+        alert("Removed first element");
+      }
+      function deleteElement() {
+        // var c = delete arrElements[2];
+        var c = document.getElementById("num1").value;
+        var d = delete arrElements[c];
+        alert("Deleted particular element");
+      }
+      function sliceArray() {
+        // var c = delete arrElements[2];
+        var e = document.getElementById("num").value;
+        var f = document.getElementById("num2").value;
+        var g = arrElements.splice(e, f);
+        alert("Sliced!!");
+      }
+      function includeElement() {
+        var h = document.getElementById("num3").value;
+        var k = arrElements.includes(h);
+        {
+          if (k) {
+            alert("true");
+          } else {
+            alert("false");
+          }
+          alert("Checked!!");
+        }
+      }
+      function pushElement() {
+        var m = document.getElementById("num4").value;
+        var n = arrElements.push(m);
+        alert("Push operation Performed!!");
+      }
+    </script>
+  </body>
+</html>

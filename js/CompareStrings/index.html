@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>String Comparing Methods</h1>
+    Enter a String
+    <input type="text" id="strng1" />
+    <br />
+    <br />
+    Enter another String
+    <input type="text" id="strng2" />
+    <br />
+    <br />
+    Select which operation to perform
+    <input
+      type="button"
+      value="By Local Compare Method"
+      onclick="loCompMeth()"
+    />
+    <input type="button" value="By '===' Method" onclick="opMeth()" />
+    <input
+      type="button"
+      value="By Traditional For Method"
+      onclick="tradForMeth()"
+    />
+    <input type="button" value="By Regulate" onclick="regMeth()" />
+    <script>
+      function loCompMeth() {
+        var s1 = document.getElementById("strng1").value;
+        var s2 = document.getElementById("strng2").value;
+        var s3 = s1.localeCompare(s2);
+        document.write(s3);
+      }
+      function opMeth() {
+        var s1 = document.getElementById("strng1").value;
+        var s2 = document.getElementById("strng2").value;
+        if (s1 === s2) document.write("Similar");
+        else document.write("Not Similar");
+      }
+      function tradForMeth() {
+        var s1 = document.getElementById("strng1").value;
+        var s2 = document.getElementById("strng2").value;
+      }
+    </script>
+  </body>
+</html>
