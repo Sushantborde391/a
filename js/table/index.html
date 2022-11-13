@@ -8,51 +8,24 @@
     <title>Document</title>
   </head>
   <body>
-    <div>
-      <p>Create array</p>
-      <input class="arrayInput" />
-      <button class="addElementbtn">Add element to array</button>
-      <button class="showElementArr">Show Array</button>
-      <p>Remove specific element from array</p>
-      <input class="removeElement" />
-      <button class="RemoveElementArrBtn">Remove Element</button>
-      <div class="finalArray">Array:</div>
-    </div>
-    <script src="script.js">
-                let arrayInput= document.querySelector(".arrayInput")
-          let addElementbtn= document.querySelector(".addElementbtn")
-          let showElementArr= document.querySelector(".showElementArr")
-          let finalArray= document.querySelector(".finalArray")
-          let RemoveElementArrBtn= document.querySelector(".RemoveElementArrBtn")
-          let removeElement= document.querySelector(".removeElement")
+    <!-- Write a JavaScript program to generate the multiplication table of a given number. -->
+    <input id="tableNo" />
+    <button id="btn">Calculate</button>
+    <div id="output"></div>
+    <script>
+      var tableNo = document.getElementById("tableNo");
+      var btn = document.getElementById("btn");
+      var output = document.getElementById("output");
 
-
-          let finalArr = []
-          let arrayAfterElementRemove = []
-          function addElement(){
-            finalArr.push(arrayInput.value);
-            arrayInput.value= "";
-          }
-
-          function ShowArr(){
-
-            finalArray.innerText = `${finalArr}`
-          }
-          function RemoveElementArr(){
-            let inputElementToRemove = removeElement.value;
-      if(finalArr.includes(inputElementToRemove)){
-         let indexOfElement = finalArr.indexOf(inputElementToRemove)
-
-      finalArr.splice(indexOfElement,1);
-      finalArray.innerText = `${finalArr}`
-      }else{
-        alert("not in string")
+      function createTable() {
+        var tableNoValue = tableNo.value;
+        for (let i = 1; i <= 10; i++) {
+          output.innerText +=
+            `${tableNoValue} * ${i} = ${tableNoValue * i}` + "\n";
+        }
       }
-          }
 
-          addElementbtn.addEventListener("click", addElement);
-          showElementArr.addEventListener("click", ShowArr);
-          RemoveElementArrBtn.addEventListener("click", RemoveElementArr);
+      btn.addEventListener("click", createTable);
     </script>
   </body>
 </html>
