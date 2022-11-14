@@ -1,0 +1,114 @@
+----------------------------------------------------------------------------------
+-- Company: 
+-- Engineer: 
+-- 
+-- Create Date: 07/26/2019 11:10:41 AM
+-- Design Name: 
+-- Module Name: exp2_98_tb - Behavioral
+-- Project Name: 
+-- Target Devices: 
+-- Tool Versions: 
+-- Description: 
+-- 
+-- Dependencies: 
+-- 
+-- Revision:
+-- Revision 0.01 - File Created
+-- Additional Comments:
+-- 
+----------------------------------------------------------------------------------
+
+
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.STD_LOGIC_unsigned.ALL;
+-- Uncomment the following library declaration if using
+-- arithmetic functions with Signed or Unsigned values
+--use IEEE.NUMERIC_STD.ALL;
+
+-- Uncomment the following library declaration if instantiating
+-- any Xilinx leaf cells in this code.
+--library UNISIM;
+--use UNISIM.VComponents.all;
+
+entity exp2_98_tb is
+--  Port ( );
+end exp2_98_tb;
+
+architecture Behavioral of exp2_98_tb is
+component shiftreg
+Port ( clk,rst,load,si : in STD_LOGIC;
+           pi : in STD_LOGIC_VECTOR (3 downto 0);
+           po : out STD_LOGIC_VECTOR (3 downto 0);
+           mode:in STD_LOGIC_VECTOR (1 downto 0);
+           so : out STD_LOGIC);
+end component shiftreg;
+
+signal clk,rst,load,si : STD_LOGIC;
+signal  pi :STD_LOGIC_VECTOR (3 downto 0);
+signal po :STD_LOGIC_VECTOR (3 downto 0);
+signal mode:STD_LOGIC_VECTOR (1 downto 0);
+signal so :STD_LOGIC;
+
+constant clk_period: time:= 10 ns;
+begin
+uut: shiftreg port map (
+     pi=>pi,
+     si=>si,
+     clk=>clk,
+     rst=>rst,
+     mode=>mode,
+     load=>load,
+     po=>po,
+     so=>so);
+     
+ process
+    begin
+    clk<='0';
+    wait for clk_period/2;
+    clk<='1';
+     wait for clk_period/2;
+    end process;
+
+    process
+    begin
+    rst<='1';
+    wait for 10 ns;
+    rst<='0';
+    
+    mode<="00";
+    pi<="1001";
+    wait for 10 ns;
+    
+    mode<="01";
+    si<='1';
+    wait for 10 ns;
+    si<='0';
+    wait for 10 ns;
+    si<='1';
+    wait for 10 ns;
+    si<='0';
+    wait for 50 ns;
+    
+    mode<="10";
+    load<='1';
+    pi<="1010";
+    wait for 20 ns;
+    load<='0';
+    wait for 50 ns;
+    
+    mode<="11";
+    load<='0';
+    wait for 10 ns;
+    si<='1';
+    wait for 10 ns;
+    si<='0';
+    wait for 10 ns;
+    si<='1';
+    wait for 10 ns;
+    si<='0';
+    wait for 10 ns;
+    load<='1';
+    wait for 20 ns;
+    end process;
+end Behavioral;
