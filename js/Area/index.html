@@ -1,46 +1,62 @@
-<!DOCTYPE html>
-<html lang="en">
+
+<html>
   <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Area Of Shapes</title>
   </head>
   <body>
     <div>
       <p>Area of circle</p>
       <input class="circleRadius" />
       <button class="circleBtn">Calculate</button>
-      <div class="areaOfCircle">area of circle</div>
+      <div class= "areaOfCircle">area of circle</div>
     </div>
-    <hr />
+    <br>
     <div>
-      <p>Area of triangle</p>
+      <p> Area of triangle</p>
       <input class="inputBase" />
       <input class="inputHeight" />
       <button class="triangleBtn">Calculate</button>
-      <div class="areaOfTriangle">area of circle</div>
+      <div class= "areaOfTriangle">area of Triangle</div>
+    </div>
+    <br>
+    <div>
+	<p> Area of Rectangle </p>
+	<input class = "inputLength" />
+	<input class = "inputBreadth" />
+	<button class = "RectangleBtn">Calculate</button>
+	<div class = "AreaOfRectangle">area of Rectangle</div>
     </div>
     <script>
       let circleRadius = document.querySelector(".circleRadius");
       let circleBtn = document.querySelector(".circleBtn");
-      let areaOfCircle = document.querySelector(".areaOfCircle");
+      let areaOfCircle = document .querySelector(".areaOfCircle");
 
       circleBtn.addEventListener("click", () => {
         let areaOfCircleFormula = 3.14 * circleRadius.value ** 2;
         areaOfCircle.innerText = areaOfCircleFormula;
       });
-      /***********************/
+    
+
       let inputBase = document.querySelector(".inputBase");
       let inputHeight = document.querySelector(".inputHeight");
       let triangleBtn = document.querySelector(".triangleBtn");
-      let areaOfTriangle = document.querySelector(".areaOfTriangle");
+       let areaOfTriangle = document.querySelector(".areaOfTriangle");
 
-      triangleBtn.addEventListener("click", () => {
+   	triangleBtn.addEventListener("click", () => {
         let areaOftriangleFormula = (inputBase.value * inputHeight.value) / 2;
         areaOfTriangle.innerText = areaOftriangleFormula;
-        //hello
+   
       });
+
+	let inputLength = document.querySelector(".inputLength");
+	let inputBreadth = document.querySelector(".inputBreadth");
+	let RectangleBtn = document.querySelector(".RectangleBtn");
+	let areaOfRectangle = document.querySelector(".areaOfRectangle");
+
+	RectangleBtn.addEventListener("click", () => {
+	let areaOfRectangleFormula = (inputLength.value * inputBreadth.value);
+	areaOfRectangle.innerText = areaOfRectangleFormula;
+});
     </script>
   </body>
 </html>
